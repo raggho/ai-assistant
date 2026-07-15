@@ -2,7 +2,7 @@
 executor.py
 Routes voice commands to the appropriate skill.
 """
-
+from skills.files import file_manager
 from skills.apps import open_app, close_app
 from skills.browser import (
     open_website,
@@ -71,30 +71,43 @@ def execute(command):
 
         target = command.replace("open", "", 1).strip()
 
-        # Browser
-        if target in WEBSITES or "." in target:
-            return open_website(target)
+        # -----------------------------
+        # Open File
+        # -----------------------------
+        if target.startswith("file"):
+            filename = target.replace("file", "", 1).strip()
+            return file_manager.open(filename)
 
-        # Folder
+        # -----------------------------
+        # Open Folder
+        # -----------------------------
+        if target.startswith("folder"):
+            folder = target.replace("folder", "", 1).strip()
+            return open_folder(folder)
+
+        # -----------------------------
+        # Common Folder
+        # -----------------------------
         if target in FOLDERS:
             return open_folder(target)
 
+        # -----------------------------
+        # Website
+        # -----------------------------
+        if target in WEBSITES or "." in target:
+            return open_website(target)
+
+        # -----------------------------
         # Project
+        # -----------------------------
         if "project" in target:
             project = target.replace("project", "").strip()
             return open_project(project)
 
+        # -----------------------------
         # Application
+        # -----------------------------
         return open_app(target)
-
-    # ------------------------------------------------
-    # CLOSE
-    # ------------------------------------------------
-    elif command.startswith("close"):
-
-        target = command.replace("close", "", 1).strip()
-
-        return close_app(target)
 
     # ------------------------------------------------
     # GOOGLE SEARCH
@@ -209,6 +222,134 @@ def execute(command):
 
     elif "open powershell" in command:
         return open_powershell()
+    
+    # ------------------------------------------------
+    # FILE MANAGEMENT
+    # ------------------------------------------------
+
+    elif command.startswith("create file"):
+
+        filename = command.replace("create file", "", 1).strip()
+
+        return file_manager.create_file(filename)
+
+    elif command.startswith("create folder"):
+
+        folder = command.replace("create folder", "", 1).strip()
+
+        return file_manager.create_folder(folder)
+    
+    elif command.startswith("delete"):
+
+        target = command.replace("delete", "", 1).strip()
+
+        return file_manager.delete(target)
+    
+    elif command.startswith("rename"):
+
+        try:
+
+            text = command.replace("rename", "", 1).strip()
+
+            source, destination = text.split(" to ", 1)
+
+            return file_manager.rename(
+                source.strip(),
+                destination.strip()
+            )
+
+        except ValueError:
+
+            return "Say: Rename old_name to new_name"
+        
+    elif command.startswith("copy"):
+
+        try:
+
+            text = command.replace("copy", "", 1).strip()
+
+            source, destination = text.split(" to ", 1)
+
+            return file_manager.copy(
+                source.strip(),
+                destination.strip()
+            )
+
+        except ValueError:
+
+            return "Say: Copy source to destination"
+        
+    elif command.startswith("move"):
+
+        try:
+
+            text = command.replace("move", "", 1).strip()
+
+            source, destination = text.split(" to ", 1)
+
+            return file_manager.move(
+                source.strip(),
+                destination.strip()
+            )
+
+        except ValueError:
+
+            return "Say: Move source to destination"
+    
+    elif command.startswith("search file"):
+
+        filename = command.replace("search file", "", 1).strip()
+
+        return file_manager.search(filename)
+    
+    elif command.startswith("list folder"):
+
+        folder = command.replace("list folder", "", 1).strip()
+
+        if not folder:
+            folder = "."
+
+        return file_manager.list_folder(folder)
+    
+    elif command.startswith("read file"):
+
+        target = command.replace("read file", "", 1).strip()
+
+        return file_manager.read_file(target)
+    
+    elif command.startswith("write file"):
+
+        try:
+
+            text = command.replace("write file", "", 1).strip()
+
+            filename, content = text.split(":", 1)
+
+            return file_manager.write_file(
+                filename.strip(),
+                content.strip()
+            )
+
+        except ValueError:
+
+            return "Say: Write file notes.txt : Hello World"
+    
+    elif command.startswith("append file"):
+
+        try:
+
+            text = command.replace("append file", "", 1).strip()
+
+            filename, content = text.split(":", 1)
+
+            return file_manager.append_file(
+                filename.strip(),
+                content.strip()
+            )
+
+        except ValueError:
+
+            return "Say: Append file notes.txt : New text"
 
     # ------------------------------------------------
     # UNKNOWN

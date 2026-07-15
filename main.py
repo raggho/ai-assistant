@@ -24,7 +24,7 @@ EXIT_COMMANDS = {
 }
 
 print("=" * 50)
-print("Babo AI Assistant")
+print("AI Assistant")
 print("=" * 50)
 
 print("Waiting for wake word...")
