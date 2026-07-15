@@ -1,8 +1,6 @@
 # Python
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
 *.egg-info/
 
 # Virtual Environment
@@ -24,24 +22,20 @@ logs/
 
 # Audio
 audio/
+*.wav
 
 # Screenshots
 screenshots/
+*.png
 
-# Whisper Models
+# Whisper
 models/
-
-# Cache
 .cache/
+
+# Test
+.pytest_cache/
+coverage/
 
 # OS
 Thumbs.db
 .DS_Store
-
-# Test Output
-.pytest_cache/
-coverage/
-
-# Build
-dist/
-build/
