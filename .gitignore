@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual Environment
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Environment
+.env
+
+# Logs
+logs/
+*.log
+
+# Audio
+audio/
+
+# Screenshots
+screenshots/
+
+# Whisper Models
+models/
+
+# Cache
+.cache/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test Output
+.pytest_cache/
+coverage/
+
+# Build
+dist/
+build/

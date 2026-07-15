@@ -1,0 +1,2 @@
+"""Configuration values for Nova."""
+

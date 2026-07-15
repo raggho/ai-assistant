@@ -1,0 +1,10 @@
+faster-whisper
+sounddevice
+scipy
+numpy
+pyttsx3
+pyautogui
+psutil
+pycaw
+comtypes
+python-dotenv
