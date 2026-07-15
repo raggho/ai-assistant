@@ -270,6 +270,17 @@ MIT License
 
 ---
 
+---
+# Future release
+| Version        | Milestone                   |
+| -------------- | --------------------------- |
+| `v0.1.0-alpha` | Core assistant completed    |
+| `v0.2.0-alpha` | File manager and memory     |
+| `v0.3.0-beta`  | AI integration begins       |
+| `v0.5.0-beta`  | Plugin architecture         |
+| `v1.0.0`       | First stable public release |
+---
+
 # 👨‍💻 Author
 
 Rajesh Ghosh
